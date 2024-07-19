@@ -1,0 +1,83 @@
+
+<!--
+    THIS EXAMPLE WAS DOWNLOADED FROM https://echarts.apache.org/examples/zh/editor.html?c=sankey-energy
+-->
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+<div id="container" style="height: 100%"></div>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<!-- Uncomment this line if you want to dataTool extension
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/extension/dataTool.min.js"></script>
+-->
+<!-- Uncomment this line if you want to use gl extension
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl@2/dist/echarts-gl.min.js"></script>
+-->
+<!-- Uncomment this line if you want to echarts-stat extension
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat@latest/dist/ecStat.min.js"></script>
+-->
+<!-- Uncomment this line if you want to use map
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/map/js/china.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/map/js/world.js"></script>
+-->
+<!-- Uncomment these two lines if you want to use bmap extension
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=<Your Key Here>"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/extension/bmap.min.js"></script>
+-->
+<script type="text/javascript">
+    var dom = document.getElementById("container");
+    var myChart = echarts.init(dom);
+    var app = {};
+    myChart.showLoading();
+    var data = {
+        "nodes": [{"name": "Canada "}, {"name": "India "}, {"name": "Others"}, {"name": "the United States "}, {"name": "Australia "}, {"name": "Japan"}, {"name": "United Kingdom "}, {"name": "China"}, {"name": "India"}, {"name": "Hong Kong "}, {"name": "Australia"}, {"name": "Russia"}, {"name": "France "}, {"name": "Singapore"}, {"name": "Germany"}, {"name": "Vietnam "}, {"name": "Thailand "}, {"name": "North Korea "}, {"name": "the United States"}, {"name": "Others "}, {"name": "Germany "}, {"name": "Japan "}],
+        "links": [{"source":"Others","target":"China","value":119},{"source":"Singapore","target":"China","value":13},{"source":"the United States","target":"China","value":334},{"source":"Japan","target":"China","value":17},{"source":"Australia","target":"China","value":10},{"source":"India","target":"China","value":24},{"source":"Germany","target":"China","value":13},{"source":"Russia","target":"China","value":11},{"source":"China","target":"Others ","value":181},{"source":"China","target":"the United States ","value":304},{"source":"China","target":"Thailand ","value":12},{"source":"China","target":"Australia ","value":28},{"source":"China","target":"North Korea ","value":16},{"source":"China","target":"Germany ","value":11},{"source":"China","target":"Canada ","value":29},{"source":"China","target":"Hong Kong ","value":21},{"source":"China","target":"Japan ","value":27},{"source":"China","target":"United Kingdom ","value":24},{"source":"China","target":"France ","value":10},{"source":"China","target":"India ","value":20},{"source":"China","target":"Vietnam ","value":11}],
+        "title": 'Transfer'
+    }
+
+    //     // 找到"Others"节点和"China"节点在节点数组中的索引位置
+    // var othersNode = data.nodes.find(node => node.name === "Others");
+    // var chinaNode = data.nodes.find(node => node.name === "China");
+
+    // // 将这两个节点从节点数组中移除
+    // data.nodes = data.nodes.filter(node => node !== othersNode && node !== chinaNode);
+
+    // // 将这两个节点按照你想要的顺序添加回节点数组的末尾
+    // data.nodes.push(othersNode, chinaNode);
+
+    var option = {
+        title: {
+            text: data.title
+        },
+        tooltip: {
+            trigger: 'item',
+            triggerOn: 'mousemove'
+        },
+        series: [
+            {
+                type: 'sankey',
+                data: data.nodes,
+                links: data.links,
+                emphasis: {
+                    focus: 'adjacency'
+                },
+                lineStyle: {
+                    color: 'gradient',
+                    curveness: 0.5
+                }
+            }
+        ]
+    };
+    myChart.hideLoading();
+    myChart.setOption(option);
+    if (option && typeof option === 'object') {
+        myChart.setOption(option);
+    }
+</script>
+</body>
+</html>
+
